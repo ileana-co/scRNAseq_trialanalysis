@@ -5,4 +5,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "About"
-      href: trial_Rmarkdown.Rmd
+      href: trial_Rmarkdown.html
+output:
+ html_document:
+ theme: cosmo
