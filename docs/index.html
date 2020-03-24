@@ -193,7 +193,13 @@ summary {
 <h2>Setting up R Markdown: trial</h2>
 <p>After following instructions on <a href="https://resources.github.com/whitepapers/github-and-rstudio/" class="uri">https://resources.github.com/whitepapers/github-and-rstudio/</a>, here is the start of my Rnotebook set-up. Just trying things out now!</p>
 <p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Once you click the <strong>Knit</strong> button to modify the HTML output, you must commit local changes to Git by doing:</p>
+<p>git add .</p>
+<p>git commit -m “comment”</p>
+<p>git push -u origin</p>
+<p>Then going to github to merge your pull request.</p>
+<p>Refresh the webpage, then you are done!</p>
+<p>You can embed an R code chunk like this:</p>
 <pre class="r"><code>summary(cars) # The first trial was to just run the code on Rmarkdown and publish</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
