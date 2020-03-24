@@ -1,0 +1,23 @@
+---
+title: "index"
+author: "Ileana"
+date: '2020-03-24'
+---
+
+## Welcome
+
+In the year of 2020, we are all being quarantined or asked to stay home due to the pandemic **COVID-19** that is happening around the world! In order to stay sane and *productive* I have started a project with the following goals in mind:
+
+* Learn to process scRNAseq data which could help in generating a relevant hypothesis for my PhD 
+* Become more proficient in R
+* Put it all on a webpage to document my progress and perhaps serve as a document to help others get started
+
+In an attempt to practice using Markdown thanks to <https://guides.github.com/features/mastering-markdown/> and <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images>, here is a random slew of things:
+
+## Random things
+
+Here is an image of macrophages interacting with bacterium:
+
+![](https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=imgres&cd=&ved=2ahUKEwjA3JWU8rPoAhXKK80KHWFLBD8QjRx6BAgBEAQ&url=http%3A%2F%2Fmgl.scripps.edu%2Fpeople%2Fgoodsell%2Fillustration%2Fmacrophagebacterium&psig=AOvVaw1ZddjtNsucq8cQKDFVHV3U&ust=1585166134185071)
+
+
