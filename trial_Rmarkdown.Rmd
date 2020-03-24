@@ -1,5 +1,13 @@
 ---
 title: "scRNAseq_trial"
+author: "Ileana"
+date: '2020-03-24'
+output: html_document
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'trial_Rmarkdown.html'))})
 ---
 
 ```{r setup, include=FALSE}
