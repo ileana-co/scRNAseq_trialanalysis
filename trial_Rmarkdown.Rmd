@@ -13,7 +13,16 @@ knit: (function(input_file, encoding) {
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ## Hello World!
-I've set-up my first R Notebook and published on Github pages. Here is me documenting my progress on setting up the R Notebook and my attempt to process scRNAseq data. This is a work in progress and meant for organizing what I've learned. 
+
+I've set-up my first R Notebook and published on Github pages <https://ileana-co.github.io/scRNAseq_trialanalysis/>. Here, I will document my progress on setting up the R Notebook and my attempt to process scRNAseq data. This is a work in progress and meant for organizing what I've learned and could maybe useful for others in the future. Hopefully, it also helps keep me sane and keep up my writing and communication skills. 
+
+Once I figure out how to make a navbar and individual pages, I will organize this page better...but for now I'll leave it all on one page! 
+
+What this page will not cover:
+* How to set-up git and SSH keys to link local computer to repository on git. You can check out all of that here: <https://help.github.com/en/github/getting-started-with-github>
+* How to set-up remote access to BioZone servers. I had to set this up since my lovely MacBook Pro only has 8gb of RAM, but the dataset we are using is already 3gb in size.
+* Common commands for using Power Shell on your terminal and using Markdown 
+* Basics of using R - there are good tutorials out there. I learned this through a course at UofT (EES1137) therefore I am not focusing on documenting my progress of learning this here.
 
 ## Setting up R Markdown: trial
 
@@ -23,15 +32,15 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Once you click the **Knit** button to modify the HTML output, you must commit local changes to Git by doing:
 
+```
 git add .
 
 git commit -m "comment"
 
 git push -u origin
+```
 
-Then going to github to merge your pull request. 
-
-Refresh the webpage, then you are done!
+Then go to github to merge your pull request, refresh the webpage, then you are done! Note that you 
 
 You can embed an R code chunk like this:
 
@@ -46,3 +55,27 @@ plot(pressure) # The third was to generate a plot
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## scRNAseq data: Who, What, Where, When, Why?
+
+**Who?** Myself, following a bunch of tutorials from:
+* Brendan Innes of the Bader Lab at UofT: <https://github.com/BaderLab/scRNAseqWorkflow>
+* Satija Lab (Seurat Package geniuses): <https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html>
+* The Broad Institute (*thanks Simon for the link*): <https://broadinstitute.github.io/2019_scWorkshop/data-wrangling-scrnaseq.html#filtering-low-quality-cells>
+* CSC IT Center for Science in Finland and NBISweden by Åsa Björklund and others: <https://nbisweden.github.io/excelerate-scRNAseq/session-qc/Quality_control.html>
+
+
+**What?** To learn, I am using the CRA001160 dataset from the GSA website (*thanks for the tip JC*) <https://bigd.big.ac.cn/search?dbId=gsa&q=CRA001160> which contains human single-cell RNA sequencing data using an Illumina HiSeq X Ten of:
+* 24 human PDAC tumours (male and female)
+* 11 normal pancreas (male and female)
+
+**Where?** My home in Toronto, Canada! COVID-19 has taken over the world, labs, businesses and non-essential services have shut down!! Also, "where" I do my analysis is through Rstudio. I started out doing things in R using the terminal since there is more computing power, but in order to document things I'm using Rstudio to access the RNotebook. 
+
+To deal with the large dataset, I have had to use workarounds (for example, the ff library in R <https://rstudio-pubs-static.s3.amazonaws.com/72295_692737b667614d369bd87cb0f51c9a4b.html>) but also set-up access to a LINUX machine with large computing power (512gb) operating on CentOS7. These tools will of course depend on the size of the dataset you have. Generally, R is really bad/slow at processing medium (1-2gb) and large (3gb) datasets-- so keep this in mind!
+
+**When?** When I have time and am not distracted :)
+
+**Why?** Analyzing scRNAseq is valuable skill to have especially since I am planning on performing this once the lab gets back up and running again (*who knows how long that is going to take though :( *)) This is especially valuable for my research since mining human datasets of PDAC can help me generate relevant hypotheses for my project... which currently does not have any!!
+
+
+
