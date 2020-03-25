@@ -262,7 +262,7 @@ a # The second was to make edits to the file and publish</code></pre>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
 <div id="downloading-r-and-your-data" class="section level3">
-<h3><strong>1. Downloading R and your data!</strong></h3>
+<h3>1. Downloading R and your data!</h3>
 <p>Assuming you already have installed the <a href="https://www.r-project.org">latest version of R</a> or Rstudio, downloaded your dataset, you are ready to go! I am currently running R 3.6.3.</p>
 <p>However, I struggled with also just figuring out what these dataset file types are. Typically, you’d want to be able to download the aligned count matrix (if using 10X Genomics, then this is directly from the Cell Ranger pipeline). I believe that Cell Ranger spits out a file containing matrix.mtx, genes.tsv (or features.tsv), and barcodes.tsv files.</p>
 <ul>
@@ -288,7 +288,7 @@ a # The second was to make edits to the file and publish</code></pre>
 ## 
 ##     xor</code></pre>
 <pre><code>## Attaching package ff</code></pre>
-<pre><code>## - getOption(&quot;fftempdir&quot;)==&quot;/var/folders/cr/td4r8_rs1b13sbpq6kg2fnrm0000gn/T//Rtmp1mD9HR&quot;</code></pre>
+<pre><code>## - getOption(&quot;fftempdir&quot;)==&quot;/var/folders/cr/td4r8_rs1b13sbpq6kg2fnrm0000gn/T//Rtmpc5B0mQ&quot;</code></pre>
 <pre><code>## - getOption(&quot;ffextension&quot;)==&quot;ff&quot;</code></pre>
 <pre><code>## - getOption(&quot;ffdrop&quot;)==TRUE</code></pre>
 <pre><code>## - getOption(&quot;fffinonexit&quot;)==TRUE</code></pre>
@@ -311,7 +311,7 @@ a # The second was to make edits to the file and publish</code></pre>
 </div>
 </div>
 <div id="install-the-necessary-packages" class="section level3">
-<h3>** 2. Install the necessary packages**</h3>
+<h3>2. Install the necessary packages</h3>
 <pre class="r"><code># install.packages(c(&quot;dplyr&quot;,&quot;multest&quot;,&quot;patchwork&quot;,&quot;Seurat&quot;,&quot;BiocManager&quot;,&quot;devtools&quot;,&quot;Matrix&quot;, &quot;ff&quot;))
 
 # BiocManager::install(c(&quot;scran&quot;,&quot;AnnotationDbi&quot;,&quot;org.Mm.eg.db&quot;,&quot;org.Hs.eg.db&quot;)) # org.Mm for mouse and org.Hs for human
@@ -319,12 +319,18 @@ a # The second was to make edits to the file and publish</code></pre>
 # You might run into some issues installing packages if you are not on the latest version of R. It is best to update R before starting anything!</code></pre>
 </div>
 <div id="load-the-necessary-packages" class="section level3">
-<h3>** 3. Load the necessary packages **</h3>
+<h3>3. Load the necessary packages</h3>
 <pre class="r"><code>#library(Seurat)
 #library(dplyr)
 #library(patchwork)
 #library(Matrix)</code></pre>
-<p>Some info on Seurat and Matrix: * Seurat is a very important library developed by the Satija lab and is widely used in all RNAseq analysis. What’s important about Seurat is: * It has functions to directly process your 10X data via <code>Read 10X</code> (input is the file from Cell Ranger) * You can transform your count matrix into a <code>Seurat</code> object which converts the count matrix into a sparse matrix (excludes zero elements) and also serves a container for both data and analysis (clustering results etc). For example, the count matrix is stored in countMatrix[[“RNA”]]<span class="citation">@counts</span>. See <a href="https://github.com/satijalab/seurat/wiki">this page</a> for more info on <code>Seurat</code> objects * Matrix has built in functions to help process the sparse matrix which Seurat converts your data into</p>
+<p>Some info on Seurat and Matrix:</p>
+<ul>
+<li>Seurat is a very important library developed by the Satija lab and is widely used in all RNAseq analysis. What’s important about Seurat is:</li>
+<li>It has functions to directly process your 10X data via <code>Read 10X</code> (input is the file from Cell Ranger)</li>
+<li>You can transform your count matrix into a <code>Seurat</code> object which converts the count matrix into a sparse matrix (excludes zero elements) and also serves a container for both data and analysis (clustering results etc). For example, the count matrix is stored in countMatrix[[“RNA”]]<span class="citation">@counts</span>. See <a href="https://github.com/satijalab/seurat/wiki">this page</a> for more info on <code>Seurat</code> objects</li>
+<li>Matrix has built in functions to help process the sparse matrix which Seurat converts your data into</li>
+</ul>
 </div>
 </div>
 

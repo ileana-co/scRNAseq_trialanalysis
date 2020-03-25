@@ -91,7 +91,7 @@ Analyzing scRNAseq is valuable skill to have especially since I am planning on p
 
 ## Getting Started
 
-### **1. Downloading R and your data!**
+### 1. Downloading R and your data!
 
 Assuming you already have installed the [latest version of R](https://www.r-project.org) or Rstudio, downloaded your dataset, you are ready to go! I am currently running R 3.6.3. 
 
@@ -105,7 +105,7 @@ In my case, I was able to download the `count-matrix.txt` file from the GSA data
 #### Option 1: Use the ff library 
 [ff](https://rstudio-pubs-static.s3.amazonaws.com/72295_692737b667614d369bd87cb0f51c9a4b.html) is the library that will help you deal with large datasets when you have limited RAM on your machine. Basically, ff uses a pointer to a C++ data structure. The location of this pointer is then stored on your RAM and you can access the data set without reading the whole thing into R.
 
-```{r, echo = FALSE}
+```{r ff, echo = FALSE}
 
 library(ff) # Load the library
 
@@ -133,7 +133,7 @@ library(ff) # Load the library
 This might take a while... It takes my MacBook almost 20 mins and uses 16gb of RAM (using a LOT of swap memory to do so since I only have 8gb of RAM). I also had to basically close every single program I had open! 
 
 
-### ** 2. Install the necessary packages**
+### 2. Install the necessary packages
 ```{r}
 
 # install.packages(c("dplyr","multest","patchwork","Seurat","BiocManager","devtools","Matrix", "ff"))
@@ -144,7 +144,7 @@ This might take a while... It takes my MacBook almost 20 mins and uses 16gb of R
 
 ```
 
-### ** 3. Load the necessary packages **
+### 3. Load the necessary packages 
 ```{r}
 
 #library(Seurat)
@@ -155,6 +155,7 @@ This might take a while... It takes my MacBook almost 20 mins and uses 16gb of R
 ```
 
 Some info on Seurat and Matrix:
+
 *   Seurat is a very important library developed by the Satija lab and is widely used in all RNAseq analysis. What's important about Seurat is:
   *   It has functions to directly process your 10X data via `Read 10X` (input is the file from Cell Ranger)
   *   You can transform your count matrix into a `Seurat` object which converts the count matrix into a sparse matrix (excludes zero elements) and also serves a container for both data and analysis (clustering results etc). For example, the count matrix is stored in countMatrix[["RNA"]]@counts. See [this page](https://github.com/satijalab/seurat/wiki) for more info on `Seurat` objects
