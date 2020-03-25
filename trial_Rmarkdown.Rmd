@@ -105,7 +105,7 @@ In my case, I was able to download the `count-matrix.txt` file from the GSA data
 #### Option 1: Use the ff library 
 [ff](https://rstudio-pubs-static.s3.amazonaws.com/72295_692737b667614d369bd87cb0f51c9a4b.html) is the library that will help you deal with large datasets when you have limited RAM on your machine. Basically, ff uses a pointer to a C++ data structure. The location of this pointer is then stored on your RAM and you can access the data set without reading the whole thing into R.
 
-```{r}
+```{r, echo = FALSE}
 
 library(ff) # Load the library
 
@@ -147,10 +147,10 @@ This might take a while... It takes my MacBook almost 20 mins and uses 16gb of R
 ### ** 3. Load the necessary packages **
 ```{r}
 
-library(Seurat)
-library(dplyr)
-library(patchwork)
-library(Matrix)
+#library(Seurat)
+#library(dplyr)
+#library(patchwork)
+#library(Matrix)
 
 ```
 

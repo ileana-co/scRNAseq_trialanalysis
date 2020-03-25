@@ -187,7 +187,7 @@ summary {
 
 <div id="hello-world" class="section level2">
 <h2>Hello World!</h2>
-<p>I’ve set-up my first R Notebook and published on Github pages <a href="https://ileana-co.github.io/scRNAseq_trialanalysis/" class="uri">https://ileana-co.github.io/scRNAseq_trialanalysis/</a>. Here, I will document my progress on setting up the R Notebook and my attempt to process scRNAseq data. This is a work in progress and meant for organizing what I’ve learned and could maybe useful for others in the future. Hopefully, it also helps keep me sane and keep up my writing and communication skills.</p>
+<p>I’ve set-up my first R Notebook and published on Github pages <a href="https://ileana-co.github.io/scRNAseq_trialanalysis/" class="uri">https://ileana-co.github.io/scRNAseq_trialanalysis/</a>. Here, I will document my progress on setting up the R Notebook and my attempt to process scRNAseq data. This is a work in progress and meant for organizing what I’ve learned and could maybe useful for others in the future. Hopefully, it also helps keep me sane and helps keep my writing and communication skills up! #Ilovedocumentation</p>
 <p>Once I figure out how to make a navbar and individual pages, I will organize this page better…but for now I’ll leave it all on one page!</p>
 <p>What this page will not cover:</p>
 <ul>
@@ -208,7 +208,9 @@ git commit -m &quot;comment&quot;
 
 git push -u origin</code></pre>
 <p>Then go to github to merge your pull request, refresh the webpage, then you are done! Note that you</p>
-<p>You can embed an R code chunk like this:</p>
+<p>You can embed an R code chunk by clicking <strong>Cmd+Option+I (for OS X) or Ctrl +Alt+I</strong>. Rmarkdown/Rnotebook will automatically create a chunk bordered by the delimeters “```{r} code chunk ‘’’”</p>
+<p>You can also run each code chunk, which makes Rmarkdown/Rnotebook really convenient for doing your analysis and documenting at the same time. I am personally used to writing scripts in Shell but because of the way R works (processes all code at once into RAM), it’s computationally easier to do things this way.</p>
+<p>For example:</p>
 <pre class="r"><code>summary(cars) # The first trial was to just run the code on Rmarkdown and publish</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
@@ -246,7 +248,7 @@ a # The second was to make edits to the file and publish</code></pre>
 <div id="where" class="section level3">
 <h3><strong>Where?</strong></h3>
 <p>My home in Toronto, Canada! COVID-19 has taken over the world, labs, businesses and non-essential services have shut down!! Also, “where” I do my analysis is through Rstudio. I started out doing things in R using the terminal since there is more computing power, but in order to document things I’m using Rstudio to access the RNotebook.</p>
-<p>To deal with the large dataset, I have had to use workarounds (for example, the <a href="https://rstudio-pubs-static.s3.amazonaws.com/72295_692737b667614d369bd87cb0f51c9a4b.html">ff library in R</a> but also set-up access to a LINUX machine with large computing power (512gb) operating on CentOS7. These tools will of course depend on the size of the dataset you have. Generally, R is really bad/slow at processing medium (1-2gb) and large (3gb) datasets– so keep this in mind!</p>
+<p>To deal with the large dataset, I have had to use workarounds (for example, the <a href="https://rstudio-pubs-static.s3.amazonaws.com/72295_692737b667614d369bd87cb0f51c9a4b.html">ff library in R</a>) and also set-up access to a LINUX machine with large computing power (512gb) operating on CentOS7. These tools will of course depend on the size of the dataset you have. Generally, R is really bad/slow at processing medium (1-2gb) and large (3gb) datasets– so keep this in mind!</p>
 </div>
 <div id="when" class="section level3">
 <h3><strong>When?</strong></h3>
@@ -255,6 +257,74 @@ a # The second was to make edits to the file and publish</code></pre>
 <div id="why" class="section level3">
 <h3><strong>Why?</strong></h3>
 <p>Analyzing scRNAseq is valuable skill to have especially since I am planning on performing this once the lab gets back up and running again (<em>who knows how long that is going to take though :( </em>)) This is especially valuable for my research since mining human datasets of PDAC can help me generate relevant hypotheses for my project… which currently does not have any!!</p>
+</div>
+</div>
+<div id="getting-started" class="section level2">
+<h2>Getting Started</h2>
+<div id="downloading-r-and-your-data" class="section level3">
+<h3><strong>1. Downloading R and your data!</strong></h3>
+<p>Assuming you already have installed the <a href="https://www.r-project.org">latest version of R</a> or Rstudio, downloaded your dataset, you are ready to go! I am currently running R 3.6.3.</p>
+<p>However, I struggled with also just figuring out what these dataset file types are. Typically, you’d want to be able to download the aligned count matrix (if using 10X Genomics, then this is directly from the Cell Ranger pipeline). I believe that Cell Ranger spits out a file containing matrix.mtx, genes.tsv (or features.tsv), and barcodes.tsv files.</p>
+<ul>
+<li>Matrix.mtx is your count-matrix in sparse matrix format. A sparse matrix essentially is a way to store huge matrices whose contents are mostly zeroes- this is true for count matrices generated by scRNAseq. Sparse matrices basically only store non-zeroes and is really helpful for saving time and computing power.</li>
+<li>Genes.tsv and barcodes.tsv basically contain the list of genes and barcodes you will need to make sense of your data</li>
+</ul>
+<p>In my case, I was able to download the <code>count-matrix.txt</code> file from the GSA database. This was a huge text file of 3-4gb, with different genes/features as row names (already in Gene ID format) and barcodes for each cell as column names. I will discuss below how I dealt with this large set of data.</p>
+<div id="option-1-use-the-ff-library" class="section level4">
+<h4>Option 1: Use the ff library</h4>
+<p><a href="https://rstudio-pubs-static.s3.amazonaws.com/72295_692737b667614d369bd87cb0f51c9a4b.html">ff</a> is the library that will help you deal with large datasets when you have limited RAM on your machine. Basically, ff uses a pointer to a C++ data structure. The location of this pointer is then stored on your RAM and you can access the data set without reading the whole thing into R.</p>
+<pre><code>## Loading required package: bit</code></pre>
+<pre><code>## Attaching package bit</code></pre>
+<pre><code>## package:bit (c) 2008-2012 Jens Oehlschlaegel (GPL-2)</code></pre>
+<pre><code>## creators: bit bitwhich</code></pre>
+<pre><code>## coercion: as.logical as.integer as.bit as.bitwhich which</code></pre>
+<pre><code>## operator: ! &amp; | xor != ==</code></pre>
+<pre><code>## querying: print length any all min max range sum summary</code></pre>
+<pre><code>## bit access: length&lt;- [ [&lt;- [[ [[&lt;-</code></pre>
+<pre><code>## for more help type ?bit</code></pre>
+<pre><code>## 
+## Attaching package: 'bit'</code></pre>
+<pre><code>## The following object is masked from 'package:base':
+## 
+##     xor</code></pre>
+<pre><code>## Attaching package ff</code></pre>
+<pre><code>## - getOption(&quot;fftempdir&quot;)==&quot;/var/folders/cr/td4r8_rs1b13sbpq6kg2fnrm0000gn/T//Rtmp1mD9HR&quot;</code></pre>
+<pre><code>## - getOption(&quot;ffextension&quot;)==&quot;ff&quot;</code></pre>
+<pre><code>## - getOption(&quot;ffdrop&quot;)==TRUE</code></pre>
+<pre><code>## - getOption(&quot;fffinonexit&quot;)==TRUE</code></pre>
+<pre><code>## - getOption(&quot;ffpagesize&quot;)==65536</code></pre>
+<pre><code>## - getOption(&quot;ffcaching&quot;)==&quot;mmnoflush&quot;  -- consider &quot;ffeachflush&quot; if your system stalls on large writes</code></pre>
+<pre><code>## - getOption(&quot;ffbatchbytes&quot;)==16777216 -- consider a different value for tuning your system</code></pre>
+<pre><code>## - getOption(&quot;ffmaxbytes&quot;)==536870912 -- consider a different value for tuning your system</code></pre>
+<pre><code>## 
+## Attaching package: 'ff'</code></pre>
+<pre><code>## The following objects are masked from 'package:bit':
+## 
+##     clone, clone.default, clone.list</code></pre>
+<pre><code>## The following objects are masked from 'package:utils':
+## 
+##     write.csv, write.csv2</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     is.factor, is.ordered</code></pre>
+<p>This might take a while… It takes my MacBook almost 20 mins and uses 16gb of RAM (using a LOT of swap memory to do so since I only have 8gb of RAM). I also had to basically close every single program I had open!</p>
+</div>
+</div>
+<div id="install-the-necessary-packages" class="section level3">
+<h3>** 2. Install the necessary packages**</h3>
+<pre class="r"><code># install.packages(c(&quot;dplyr&quot;,&quot;multest&quot;,&quot;patchwork&quot;,&quot;Seurat&quot;,&quot;BiocManager&quot;,&quot;devtools&quot;,&quot;Matrix&quot;, &quot;ff&quot;))
+
+# BiocManager::install(c(&quot;scran&quot;,&quot;AnnotationDbi&quot;,&quot;org.Mm.eg.db&quot;,&quot;org.Hs.eg.db&quot;)) # org.Mm for mouse and org.Hs for human
+
+# You might run into some issues installing packages if you are not on the latest version of R. It is best to update R before starting anything!</code></pre>
+</div>
+<div id="load-the-necessary-packages" class="section level3">
+<h3>** 3. Load the necessary packages **</h3>
+<pre class="r"><code>#library(Seurat)
+#library(dplyr)
+#library(patchwork)
+#library(Matrix)</code></pre>
+<p>Some info on Seurat and Matrix: * Seurat is a very important library developed by the Satija lab and is widely used in all RNAseq analysis. What’s important about Seurat is: * It has functions to directly process your 10X data via <code>Read 10X</code> (input is the file from Cell Ranger) * You can transform your count matrix into a <code>Seurat</code> object which converts the count matrix into a sparse matrix (excludes zero elements) and also serves a container for both data and analysis (clustering results etc). For example, the count matrix is stored in countMatrix[[“RNA”]]<span class="citation">@counts</span>. See <a href="https://github.com/satijalab/seurat/wiki">this page</a> for more info on <code>Seurat</code> objects * Matrix has built in functions to help process the sparse matrix which Seurat converts your data into</p>
 </div>
 </div>
 
